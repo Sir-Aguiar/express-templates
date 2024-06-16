@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { ProcessError } from "../entity/errors/ProcessError";
+import { ZodError } from "zod";
 
 type KnownServerErrors = ProcessError | Error;
 
@@ -33,6 +34,14 @@ export class HTTPHandler {
       return this.response.status(code).json({ error: { message } });
     }
 
+    if (error instanceof ZodError) {
+      return this.response.status(400).json({ error: { message: error.message } });
+    }
+
+    return this.response.status(500).json({});
+  }
+
+  public unkownError() {
     return this.response.status(500).json({});
   }
 }
