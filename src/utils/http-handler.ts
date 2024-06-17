@@ -2,7 +2,7 @@ import { Response } from "express";
 import { ProcessError } from "../entity/errors/ProcessError";
 import { ZodError } from "zod";
 
-type KnownServerErrors = ProcessError | Error;
+type KnownServerErrors = ProcessError | ZodError| Error;
 
 export class HTTPHandler {
   constructor(private response: Response) {}

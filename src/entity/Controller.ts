@@ -12,7 +12,7 @@ export abstract class BaseController {
 
   abstract requestHandler(): Promise<any>;
 
-  public async handleError(error: any): Promise<any> {
+  protected async handleError(error: any): Promise<any> {
     if (error instanceof ProcessError || error instanceof ZodError) {
       return this.HttpHandler.knownError(error);
     }
